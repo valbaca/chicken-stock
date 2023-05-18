@@ -1,7 +1,7 @@
-import { Entypo, MaterialIcons } from "@expo/vector-icons"
-import React from "react"
-import { View } from "react-native"
-import styled from "styled-components"
+import { Entypo, MaterialIcons } from '@expo/vector-icons'
+import React from 'react'
+import { View } from 'react-native'
+import styled from 'styled-components'
 
 // https://stackoverflow.com/questions/75352416/how-do-i-use-a-useref-hook-in-a-text-input-field-in-react-native
 
@@ -14,15 +14,17 @@ export default function TodoList({ item, deleteItem }) {
         </CircleContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextUnder>Have: {item.have}  Need: {item.total - item.have}</TextUnder>
+          <TextUnder>
+            Have: {item.have} Need: {item.total - item.have}
+          </TextUnder>
         </View>
-        
+
         <IconContainer onPress={() => deleteItem(item.key)}>
           <MaterialIcons name="delete" size={24} color="midnightblue" />
         </IconContainer>
       </ListContainer>
     </ComponentContainer>
-  );
+  )
 }
 
 const ListContainer = styled.TouchableOpacity`
@@ -33,14 +35,14 @@ const ListContainer = styled.TouchableOpacity`
   border-radius: 10px;
   flex-direction: row;
   justify-content: space-between;
-`;
+`
 
 const ComponentContainer = styled.View`
   flex-direction: row;
   justify-content: center;
   height: auto;
   width: auto;
-`;
+`
 
 const TextItem = styled.Text`
   color: black;
@@ -49,7 +51,7 @@ const TextItem = styled.Text`
   font-size: 20px;
   margin-top: 10px;
   margin-right: 20px;
-`;
+`
 
 const TextUnder = styled.Text`
   color: teal;
@@ -57,7 +59,7 @@ const TextUnder = styled.Text`
   margin-right: 20px;
 
   border-radius: 10px;
-`;
+`
 
 const IconContainer = styled.TouchableOpacity`
   align-items: center;
@@ -68,10 +70,10 @@ const IconContainer = styled.TouchableOpacity`
   height: 40px;
 
   border-radius: 10px;
-`;
+`
 
 const CircleContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding-left: 5px;
-`;
+`

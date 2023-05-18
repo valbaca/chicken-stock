@@ -1,35 +1,42 @@
 import { AntDesign } from '@expo/vector-icons'
-import { useRef } from 'react';
+import { useRef } from 'react'
 import styled from 'styled-components'
 
-
-export default function AddInput({addHandler}) {
-  const inputRef = useRef(null);
-  return (    
-  <ComponentContainer>
-    <InputContainer>
-      <Input 
-      placeholder="Add Item..." 
-      ref={inputRef}
-      onChangeText={(s) => inputRef.current.value = s}/>
-    </InputContainer>
-    <SubmitButton
-      onPress={() => addHandler({name: inputRef.current?.value})}
-    >
-      <AntDesign name="plus" size={24} color="midnightblue" />
-    </SubmitButton>
-  </ComponentContainer>)
+export default function AddInput({ addedHandler }) {
+  const inputRef = useRef(null)
+  const onSubmitPress = () => {
+    addedHandler({ name: inputRef.current?.value })
+    inputRef.current.value = ''
+    inputRef.current.clear()
+  }
+  return (
+    <ComponentContainer>
+      <InputContainer>
+        <Input
+          placeholder="Add Item..."
+          clearButtonMode="while-editing"
+          enterKeyHint="done"
+          onSubmitEditing={onSubmitPress}
+          ref={inputRef}
+          onChangeText={s => (inputRef.current.value = s)}
+        />
+      </InputContainer>
+      <SubmitButton onPress={onSubmitPress}>
+        <AntDesign name="plus" size={24} color="midnightblue" />
+      </SubmitButton>
+    </ComponentContainer>
+  )
 }
 
 const ComponentContainer = styled.View`
   flex-direction: row;
   margin-top: 60px;
-`;
+`
 
 const InputContainer = styled.View`
   flex-direction: row;
   border-radius: 10px;
-`;
+`
 
 const Input = styled.TextInput`
   font-size: 20px;
@@ -39,7 +46,7 @@ const Input = styled.TextInput`
   padding: 10px;
   margin-bottom: 20px;
   border-radius: 10px;
-`;
+`
 
 const SubmitButton = styled.TouchableOpacity`
   width: 50px;
@@ -48,4 +55,4 @@ const SubmitButton = styled.TouchableOpacity`
   background-color: whitesmoke;
   margin-bottom: 20px;
   border-radius: 50px;
-`;
+`

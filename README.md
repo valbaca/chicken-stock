@@ -1,5 +1,6 @@
 # chicken-stock
-A simple app to keep your food in stock!
+
+A simple app to keep your food in stock! 🐓
 
 ## Useful links
 
