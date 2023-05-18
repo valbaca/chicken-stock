@@ -3,17 +3,20 @@ import React from "react"
 import { View } from "react-native"
 import styled from "styled-components"
 
+// https://stackoverflow.com/questions/75352416/how-do-i-use-a-useref-hook-in-a-text-input-field-in-react-native
+
 export default function TodoList({ item, deleteItem }) {
   return (
     <ComponentContainer>
       <ListContainer>
-        <CirlceContainer>
-          <Entypo name="circle" size={20} color="midnightblue" />
-        </CirlceContainer>
+        <CircleContainer>
+          <Entypo name="minus" size={20} color="midnightblue" />
+        </CircleContainer>
         <View>
           <TextItem>{item.value}</TextItem>
-          <TextDate>Task</TextDate>
+          <TextUnder>Have: {item.have}  Need: {item.total - item.have}</TextUnder>
         </View>
+        
         <IconContainer onPress={() => deleteItem(item.key)}>
           <MaterialIcons name="delete" size={24} color="midnightblue" />
         </IconContainer>
@@ -48,13 +51,12 @@ const TextItem = styled.Text`
   margin-right: 20px;
 `;
 
-const TextDate = styled.Text`
-  color: goldenrod;
-  font-size: 15px;
+const TextUnder = styled.Text`
+  color: teal;
+  font-size: 12px;
   margin-right: 20px;
 
   border-radius: 10px;
-  width: 40px;
 `;
 
 const IconContainer = styled.TouchableOpacity`
@@ -68,7 +70,7 @@ const IconContainer = styled.TouchableOpacity`
   border-radius: 10px;
 `;
 
-const CirlceContainer = styled.View`
+const CircleContainer = styled.View`
   align-items: center;
   justify-content: center;
   padding-left: 5px;

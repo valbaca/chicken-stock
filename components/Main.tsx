@@ -4,9 +4,10 @@ import { FlatList, StyleSheet, View } from 'react-native'
 import AddInput from './AddInput'
 import TodoList from './TodoList'
 
+
 export default function Main() {
   const [data, setData] = useState([
-    {value: "Beans", key: Math.random().toString()}
+    {value: "Beans", key: Math.random().toString(), have: 1, total: 1}
   ]);
 
   const deleteItem = (key) => {
@@ -14,20 +15,22 @@ export default function Main() {
     prevData.filter((item) => item.key != key))
   }
 
-  const submitHandler  = ({name}) => {
+  const addHandler  = ({name}) => {
     if (!name) return;
-    setData((prevData) => {
-      console.log({prevData, name})
-      return [
-        {value: name, key: Math.random().toString()},
-        ...prevData
-      ]
-    })
+    setData((prevData) => [
+      {
+        value: name, 
+        key: Math.random().toString(),
+        have: 1,
+        total: 1
+      },
+      ...prevData
+    ])
   }
   return (
     <View style={styles.container}>
     <StatusBar style="auto" />
-    <AddInput submitHandler={submitHandler} />
+    <AddInput addHandler={addHandler} />
       
       <FlatList
             data={data}

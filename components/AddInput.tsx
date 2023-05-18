@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import styled from 'styled-components'
 
 
-export default function AddInput({submitHandler}) {
+export default function AddInput({addHandler}) {
   const inputRef = useRef(null);
   return (    
   <ComponentContainer>
@@ -14,7 +14,7 @@ export default function AddInput({submitHandler}) {
       onChangeText={(s) => inputRef.current.value = s}/>
     </InputContainer>
     <SubmitButton
-      onPress={() => submitHandler({name: inputRef.current?.value})}
+      onPress={() => addHandler({name: inputRef.current?.value})}
     >
       <AntDesign name="plus" size={24} color="midnightblue" />
     </SubmitButton>
@@ -23,7 +23,7 @@ export default function AddInput({submitHandler}) {
 
 const ComponentContainer = styled.View`
   flex-direction: row;
-  margin-top: 40px;
+  margin-top: 60px;
 `;
 
 const InputContainer = styled.View`
