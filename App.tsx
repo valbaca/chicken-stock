@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
-import { RootSiblingParent } from 'react-native-root-siblings'
 import { Entypo } from '@expo/vector-icons'
 import Main from './components/Main'
 
@@ -94,51 +93,49 @@ export default function App() {
   }
 
   return (
-    <RootSiblingParent>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen
-            name="Have"
-            children={() => (
-              <Main
-                data={data}
-                addItem={addItem}
-                deleteItem={deleteItem}
-                incItem={incItem}
-                decItem={decItem}
-                decTotalItem={decTotalItem}
-                incTotalItem={incTotalItem}
-                mode={'Have'}
-              />
-            )}
-            options={{
-              tabBarIcon: () => (
-                <Entypo name="bowl" size={20} color="midnightblue" />
-              )
-            }}
-          />
-          <Tab.Screen
-            name="Need"
-            children={() => (
-              <Main
-                data={data}
-                addItem={addItem}
-                deleteItem={deleteItem}
-                incItem={incItem}
-                decItem={decItem}
-                decTotalItem={decTotalItem}
-                incTotalItem={incTotalItem}
-                mode={'Need'}
-              />
-            )}
-            options={{
-              tabBarIcon: () => (
-                <Entypo name="shopping-cart" size={20} color="midnightblue" />
-              )
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </RootSiblingParent>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen
+          name="Have"
+          children={() => (
+            <Main
+              data={data}
+              addItem={addItem}
+              deleteItem={deleteItem}
+              incItem={incItem}
+              decItem={decItem}
+              decTotalItem={decTotalItem}
+              incTotalItem={incTotalItem}
+              mode={'Have'}
+            />
+          )}
+          options={{
+            tabBarIcon: () => (
+              <Entypo name="bowl" size={20} color="midnightblue" />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="Need"
+          children={() => (
+            <Main
+              data={data}
+              addItem={addItem}
+              deleteItem={deleteItem}
+              incItem={incItem}
+              decItem={decItem}
+              decTotalItem={decTotalItem}
+              incTotalItem={incTotalItem}
+              mode={'Need'}
+            />
+          )}
+          options={{
+            tabBarIcon: () => (
+              <Entypo name="shopping-cart" size={20} color="midnightblue" />
+            )
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   )
 }
