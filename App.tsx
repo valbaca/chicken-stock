@@ -8,7 +8,7 @@ import debounce from './util/debounce.js'
 
 const STORAGE_KEY = 'chicken-stock-storage-key'
 const INIT_DATA = [
-  { value: 'Beans', key: Math.random().toString(), have: 1, total: 1 }
+  { value: 'Chicken Stock', key: Math.random().toString(), have: 1, total: 1 }
 ]
 const storeData = debounce(data => {
   if (data !== INIT_DATA) {
@@ -24,13 +24,15 @@ export default function App() {
   // once, on-load => load state data from local storage
   useEffect(() => {
     if (data === INIT_DATA) {
-      console.log(`Trying to read from storage`)
-      // try to load from storage
+      // load from storage
       AsyncStorage.getItem(STORAGE_KEY).then(storedData => {
-        console.log(`Read from storage: ${storedData}`)
         if (!storedData) return
-        const parsed = JSON.parse(storedData)
-        setData(parsed)
+        try {
+          const parsed = JSON.parse(storedData)
+          setData(parsed)
+        } catch (e) {
+          console.error(`Error: ${e}. Couldn't parse JSON: ${storedData}`)
+        }
       })
     }
   }, [])
