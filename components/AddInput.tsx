@@ -1,6 +1,6 @@
-import { AntDesign } from '@expo/vector-icons'
 import { useRef } from 'react'
 import styled from 'styled-components'
+import { Entypo } from '@expo/vector-icons'
 
 export default function AddInput({ addedHandler }) {
   const inputRef = useRef(null)
@@ -22,7 +22,7 @@ export default function AddInput({ addedHandler }) {
         />
       </InputContainer>
       <SubmitButton onPress={onSubmitPress}>
-        <AntDesign name="plus" size={24} color="midnightblue" />
+        <Entypo name="add-to-list" size={24} color="midnightblue" />
       </SubmitButton>
     </ComponentContainer>
   )
@@ -41,7 +41,7 @@ const InputContainer = styled.View`
 const Input = styled.TextInput`
   font-size: 20px;
   background-color: white;
-  width: 300px;
+  width: 250px;
   margin-right: 20px;
   padding: 10px;
   margin-bottom: 20px;
@@ -53,6 +53,16 @@ const SubmitButton = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
   background-color: whitesmoke;
+  margin-right: 5px;
+  margin-bottom: 20px;
+  border-radius: 50px;
+`
+const WantModeSwitch = styled.TouchableOpacity`
+  width: 50px;
+  justify-content: center;
+  align-items: center;
+  background-color: whitesmoke;
+  margin-right: 10px;
   margin-bottom: 20px;
   border-radius: 50px;
 `

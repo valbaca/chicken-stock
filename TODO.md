@@ -1,8 +1,8 @@
 # TODO
 
-- [ ] handle "used" in have
-- [ ] handle "bought" in need
-- [ ] handle down/up in want
-- [ ] shake undo
 - [ ] add logo
+- [x] handle "used" in have
+- [x] handle "bought" in need
+- [x] handle down/up in want
+- [ ] shake undo
 - [ ] add splash screen

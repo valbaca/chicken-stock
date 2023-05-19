@@ -1,34 +1,22 @@
+import { FlatList, StyleSheet, Text, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
-import { useState } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
 import AddInput from './AddInput'
-import TodoList from './TodoList'
+import ListItem from './ListItem'
 
-export default function Main() {
-  const [data, setData] = useState([
-    { value: 'Beans', key: Math.random().toString(), have: 1, total: 1 }
-  ])
-
-  const deleteItem = key => {
-    setData(prevData => prevData.filter(item => item.key != key))
-  }
-
-  const addedHandler = ({ name }) => {
-    if (!name) return
-    setData(prevData => [
-      {
-        value: name,
-        key: Math.random().toString(),
-        have: 1,
-        total: 1
-      },
-      ...prevData
-    ])
-  }
+export default function Main({
+  data,
+  deleteItem,
+  addItem,
+  decItem,
+  incItem,
+  decTotalItem,
+  incTotalItem,
+  mode
+}) {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <AddInput addedHandler={addedHandler} />
+      <AddInput addedHandler={addItem} />
 
       <FlatList
         data={data}
@@ -36,7 +24,15 @@ export default function Main() {
         ListEmptyComponent={() => <></>}
         keyExtractor={item => item.key}
         renderItem={({ item }) => (
-          <TodoList item={item} deleteItem={deleteItem} />
+          <ListItem
+            item={item}
+            deleteItem={deleteItem}
+            decItem={decItem}
+            incItem={incItem}
+            decTotalItem={decTotalItem}
+            incTotalItem={incTotalItem}
+            mode={mode}
+          />
         )}
       />
     </View>
