@@ -1,15 +1,45 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { Entypo } from '@expo/vector-icons'
 import Main from './components/Main'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import debounce from './util/debounce.js'
+
+const STORAGE_KEY = 'chicken-stock-storage-key'
+const INIT_DATA = [
+  { value: 'Beans', key: Math.random().toString(), have: 1, total: 1 }
+]
+const storeData = debounce(data => {
+  if (data !== INIT_DATA) {
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data))
+  }
+})
 
 const Tab = createMaterialBottomTabNavigator()
 
 export default function App() {
-  const [data, setData] = useState([
-    { value: 'Beans', key: Math.random().toString(), have: 1, total: 1 }
-  ])
+  const [data, setData] = useState(INIT_DATA)
+
+  // once, on-load => load state data from local storage
+  useEffect(() => {
+    if (data === INIT_DATA) {
+      console.log(`Trying to read from storage`)
+      // try to load from storage
+      AsyncStorage.getItem(STORAGE_KEY).then(storedData => {
+        console.log(`Read from storage: ${storedData}`)
+        if (!storedData) return
+        const parsed = JSON.parse(storedData)
+        setData(parsed)
+      })
+    }
+  }, [])
+
+  useEffect(() => {
+    // This runs on each render, BUT storeData is debounced
+    // So this only saves after no new data/renders for 250ms
+    storeData(data)
+  })
 
   const deleteItem = key => {
     setData(prevData => prevData.filter(item => item.key != key))
